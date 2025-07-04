@@ -7,8 +7,9 @@
 
 /* Base page styles */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f1f1f1;
+  font-family: 'Helvetica Neue', Arial, sans-serif; /* Modern sans-serif font */
+  background-color: #000000; /* Black background for a space theme */
+  color: #ffffff; /* White text for contrast */
   padding: 20px;
 }
 
@@ -29,9 +30,9 @@ body {
 }
 
 h1 {
-  font-family: Verdana, sans-serif;
+  font-family: 'Arial Black', Arial, sans-serif; /* Bold font for emphasis */
   font-weight: bold;
-  color: #212121;
+  color: #ffffff; /* White text */
 }
 
 /* Logo */
@@ -53,11 +54,11 @@ h1 {
 /* Inputs and buttons */
 input[type="date"],
 button {
-  font-family: Arial, sans-serif;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
   font-weight: normal;
-  color: #666;
+  color: #000000; /* Black text */
   padding: 10px 15px;
-  border: 1px solid #ddd;
+  border: 1px solid #ffffff; /* White border */
   border-radius: 4px;
   font-size: 16px;
   line-height: 1.4;
@@ -66,12 +67,15 @@ button {
 
 /* Button specific */
 button {
-  background-color: #d3d3d3;
-  color: black;
+  background-color: #ff0000; /* NASA red */
+  color: #ffffff; /* White text */
   cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition */
 }
 button:hover {
-  background-color: #bfbfbf;
+  background-color: #cc0000; /* Darker red for hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
 }
 
 /* Stack horizontally on wider screens */
@@ -101,33 +105,59 @@ button:hover {
   flex: 1 1 100%;  /* full width by default */
   min-width: 280px;
   max-width: 500px;
-  background: white;
+  background: #ffffff; /* White background for contrast */
   padding: 10px;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 5px rgba(255, 255, 255, 0.2); /* Subtle white shadow */
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+}
+.gallery-item:hover {
+  transform: translateY(-5px); /* Slight lift on hover */
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.4); /* Enhanced shadow on hover */
 }
 
-/* Three columns on wider screens */
-@media (min-width: 1000px) {
-  .gallery-item {
-    flex: 0 1 31%;
-  }
-}
-
+/* Add zoom-in effect to gallery items */
 .gallery-item img {
   width: 100%;
   height: 200px;
   object-fit: cover;
   border-radius: 4px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth zoom-in and shadow transition */
+}
+.gallery-item img:hover {
+  transform: scale(1.1); /* Slight zoom-in on hover */
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.4); /* Enhanced shadow on hover */
 }
 
 .gallery-item p {
   margin-top: 10px;
   padding: 5px;
   font-size: 14px;
+  color: #000000; /* Black text for readability */
+}
+
+/* Styles for embedded videos */
+.gallery-item iframe {
+  width: 100%;
+  height: 200px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+/* Styles for video links */
+.video-link {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #ff0000; /* NASA red */
+  text-decoration: none;
+  font-weight: bold;
+}
+.video-link:hover {
+  text-decoration: underline;
 }
 
 /* Placeholder content */
@@ -135,10 +165,130 @@ button:hover {
   flex: 1 1 100%;
   text-align: center;
   padding: 40px;
-  color: #666;
+  color: #ffffff; /* White text */
 }
 
 .placeholder-icon {
   font-size: 48px;
   margin-bottom: 20px;
+}
+
+/* Modal styles */
+#imageModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+  display: none; /* Hidden by default */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  z-index: 1000;
+  overflow: auto; /* Enable scrolling for the modal */
+}
+
+.modal-content {
+  background-color: #ffffff; /* White background for contrast */
+  color: #000000; /* Black text */
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Add shadow for depth */
+  max-height: 90%; /* Limit height to 90% of the viewport */
+  overflow-y: auto; /* Enable vertical scrolling for content */
+}
+
+.modal-content img {
+  max-width: 100%;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.modal-content h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.modal-content p {
+  font-size: 16px;
+  margin-bottom: 10px;
+  text-align: left; /* Align text for better readability */
+  overflow-y: auto; /* Enable scrolling for long text */
+  max-height: 200px; /* Limit height of text content */
+  padding-right: 10px; /* Add padding for scrollbar spacing */
+}
+
+/* Close button styles */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #000000;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.close-button:hover {
+  color: #ff0000; /* Change color on hover */
+}
+
+/* Loading and error messages */
+.loading-message,
+.error-message {
+  text-align: center;
+  font-size: 18px;
+  color: #ffffff; /* White text */
+  margin-top: 20px;
+}
+
+/* Space fact section */
+.space-fact {
+  text-align: center;
+  font-size: 18px;
+  color: #ffffff; /* White text */
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #1a1a1a; /* Dark background for contrast */
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(255, 255, 255, 0.2); /* Subtle shadow */
+}
+
+/* Fact Flash button */
+.fact-flash-button {
+  display: block;
+  margin: 10px auto 20px; /* Center the button */
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff; /* White text */
+  background-color: #0077ff; /* Bright blue */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition */
+}
+.fact-flash-button:hover {
+  background-color: #0056cc; /* Darker blue on hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* Loading animation styles */
+.loading-animation {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  text-align: center;
+  color: #ffffff; /* White text for visibility */
+}
+
+.loading-animation p {
+  font-size: 18px;
+  margin-bottom: 10px;
 }
